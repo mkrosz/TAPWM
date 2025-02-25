@@ -1,10 +1,137 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    color: #333;
+  }
+  
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #F8F8F8;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+  }
+  
+  
+  .logo img {
+    height: 40px;
+  }
+
+  .menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  .container {
+    display: grid;
+    grid-template-columns: 65% 30%;
+    gap: 60px;
+    padding: 100px;
+  }
+  
+  .main-content .title-section {
+    text-align: left;
+    margin-bottom: 20px;
+  }
+  
+  .main-content .title-section h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  
+  .main-content .title-section h2 {
+    font-size: 1.2rem;
+    color: #666;
+  }
+  
+  .content {
+    margin-bottom: 45px;
 }
 
-body{
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
+  .image-container {
+    margin-top: 20px;
+  }
+  
+  .image-container img {
+    max-width: 100%;
+    display: block;
+  }
+  
+  .sidebar {
+    position: fixed;
+    top: 60px;
+    right: 100px;
+    width: calc((100vw - 200px) * 0.3);
+    border-radius: 30px;
+    height: calc(100vh - 120px);
+    overflow-y: auto;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+  }
+  
+
+  .sidebar nav ul {
+    list-style: none;
+  }
+  
+  .sidebar nav ul li {
+    margin-bottom: 1rem;
+  }
+  
+  .sidebar nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    padding: 5px 10px;
+    display: block;
+    transition: background-color 0.3s ease;
 }
+
+.sidebar nav ul li a.active {
+    background-color: #007BFF;
+    color: #fff;
+    border-radius: 5px;
+}
+
+  .sidebar nav ul li a:hover {
+    color: #007BFF;
+  }
+  
+  @media (max-width: 768px) {
+    .menu-toggle {
+      display: block;
+    }
+    
+    .container {
+      display: block;
+      padding: 20px;
+      gap: 0;
+    }
+    
+    .main-content,
+    .sidebar {
+      width: 100%;
+    }
+    
+    .sidebar {
+      position: relative;
+      height: auto;
+      margin-top: 20px;
+    }
+  }
+  
