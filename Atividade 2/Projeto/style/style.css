@@ -9,6 +9,25 @@
     background-color: #f8f8f8;
     color: #333;
   }
+
+  body::-webkit-scrollbar {
+    width: 5px;
+    height: 7px;
+  }
+  
+  body::-webkit-scrollbar-track {
+    background: #d1d1d1;
+    border-radius: 5px;
+  }
+  
+  body::-webkit-scrollbar-thumb {
+    background: #1b1b1b;
+    border-radius: 5px;
+  }
+  
+  body::-webkit-scrollbar-button {
+    width: 20px;
+  }
   
   .header {
     position: fixed;
@@ -36,9 +55,12 @@
     cursor: pointer;
   }
   
+  /*TEXTO*/
+    
   .container {
     display: grid;
     grid-template-columns: 65% 30%;
+    align-items: flex-start;
     gap: 60px;
     padding: 100px;
   }
@@ -46,6 +68,7 @@
   .main-content .title-section {
     text-align: left;
     margin-bottom: 20px;
+    padding-top: 60px;
   }
   
   .main-content .title-section h1 {
@@ -62,28 +85,39 @@
     margin-bottom: 45px;
 }
 
-  .image-container {
-    margin-top: 20px;
-  }
-  
-  .image-container img {
-    max-width: 100%;
-    display: block;
-  }
-  
-  .sidebar {
-    position: fixed;
-    top: 60px;
-    right: 100px;
-    width: calc((100vw - 200px) * 0.3);
-    border-radius: 30px;
-    height: calc(100vh - 120px);
-    overflow-y: auto;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    padding: 20px;
-  }
-  
+  /*IMAGES*/
+
+.image-container {
+  margin-top: 25px;
+  width: 730px;  
+  height: 300px;
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(var(--cols, 3), 1fr);
+  grid-auto-rows: 1fr;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+  /*SIDEBAR*/
+
+.sidebar {
+  position: sticky;
+  top: 60px;
+  width: calc((100vw - 200px) * 0.3);
+  border-radius: 30px;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  z-index: auto;
+}
 
   .sidebar nav ul {
     list-style: none;
@@ -111,6 +145,111 @@
   .sidebar nav ul li a:hover {
     color: #007BFF;
   }
+
+  /*FOOTER*/
+  
+  .container{
+    max-width: 1170px;
+    margin:auto;
+    padding-left: 0px;
+    padding-top: 20px;
+    padding-right: 0px;
+
+  }
+  .row{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+  }
+  ul{
+    list-style: none;
+  }
+  .footer{
+    background-color: #24262b;
+  }
+  .footer-col{
+     width: 29.61%;
+     padding: 0 15px;
+  }
+  .footer-col h4{
+    font-size: 18px;
+    color: #ffffff;
+    text-transform: capitalize;
+    margin-bottom: 35px;
+    font-weight: 500;
+    position: relative;
+  }
+  .footer-col h4::before{
+    content: '';
+    position: absolute;
+    left:0;
+    bottom: -10px;
+    background-color: #e91e63;
+    height: 2px;
+    box-sizing: border-box;
+    width: 50px;
+  }
+  .footer-col ul li:not(:last-child){
+    margin-bottom: 10px;
+  }
+
+  .footer-col ul li a {
+    font-size: 16px;
+    text-transform: capitalize;
+    color: #bbbbbb;
+    display: block;
+    transition: transform 0.3s ease, color 0.3s ease;
+    text-decoration: none;   
+    white-space: nowrap;      
+    overflow: hidden;       
+  }
+  
+  .footer-col ul li a:hover {
+    color: #ffffff;
+    transform: translateX(8px);
+  }
+
+  .footer-col .social-links a{
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    background-color: rgba(255,255,255,0.2);
+    margin:0 10px 10px 0;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(2, auto);
+    color: #ffffff;
+    transition: all 0.5s ease;
+  }
+  .footer-col .social-links a:hover{
+    color: #24262b;
+    background-color: #ffffff;
+  }
+
+  .footer-col.references ul {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(5, auto);
+    gap: 15px 40px; 
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /*responsive*/
+  @media(max-width: 767px){
+    .footer-col{
+      width: 50%;
+      margin-bottom: 30px;
+  }
+  }
+  @media(max-width: 574px){
+    .footer-col{
+      width: 100%;
+  }
+  }  
   
   @media (max-width: 768px) {
     .menu-toggle {
