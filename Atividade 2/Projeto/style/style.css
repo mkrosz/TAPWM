@@ -93,6 +93,12 @@ html {
 }
 
 /* MAIN CONTENT */
+
+.main-content {
+  min-height: calc(100vh - 120px); 
+  padding-bottom: 60px;
+}
+
 .main-content .title-section {
   text-align: left;
   margin-bottom: 20px;
@@ -145,17 +151,16 @@ html {
 
 .sidebar {
   position: sticky;
-  top: 60px;
+  top: 8%;
+  bottom: 0;
   width: calc((100vw - 200px) * 0.3);
   border-radius: 30px;
-  max-height: calc(100vh - 120px);
+  max-height: calc(100vh - 60px);
   overflow-y: auto;
   background-color: #fff;
   border: 1px solid #ddd;
   padding: 20px 0;
-  z-index: auto;
-  margin-bottom: 45px;
-}
+  z-index: auto;}
 
 .sidebar nav ul {
   list-style: none;
