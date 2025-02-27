@@ -1,36 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+h1 {
+  font-family: 'Kanit', sans-serif;
+  font-weight: 800;
+}
+
+h2 {
+  font-family: 'Kanit', sans-serif;
+  font-weight: 500;
+}
+
+p {
+  font-family: 'Kanit', sans-serif;
+  font-weight: 400;
+}
+
+a {
+  font-family: 'Kanit', sans-serif;
+  font-weight: 500;
+}
+
+h4 {
+  font-family: 'Kanit', sans-serif;
+  font-weight: 800;
+}
+
 body {
   font-family: Arial, sans-serif;
   background-color: #f0f2f5;
   color: #333;
-}
-
-body::-webkit-scrollbar {
-  width: 5px;
-  height: 7px;
-}
-
-body::-webkit-scrollbar-track {
-  background: #c8c8c8;
-  border-radius: 5px;
-}
-
-body::-webkit-scrollbar-thumb {
-  background: #555;
-  border-radius: 5px;
-}
-
-body::-webkit-scrollbar-button {
-  width: 20px;
+  overflow-y: scroll;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+body::-webkit-scrollbar {
+  width: 8px;
+}
+
+body::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.01);
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #e91e6374;
+  border-radius: 10px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background: #e91e63;
 }
 
 ::selection {
@@ -43,7 +69,7 @@ html {
   grid-template-columns: 65% 30%;
   align-items: flex-start;
   gap: 60px;
-  padding: 35px 100px 100px 50px;
+  padding: 35px 100px 0px 50px;
   max-width: 1170px;
   margin: auto;
 }
@@ -68,8 +94,9 @@ html {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.logo img {
-  height: 40px;
+.logo i {
+  font-size: 30px;
+  color: #e91e63;
 }
 
 .menu-toggle {
@@ -148,7 +175,7 @@ html {
   object-fit: cover;
   display: block;
   border: 1.8px solid #e91e63;
-  border-radius: 5px;
+  border-radius: 12px;
 }
 
 /* SIDEBAR */
@@ -160,15 +187,13 @@ html {
 
 .sidebar {
   position: sticky;
-  top: 8%;
+  top: 12%;
   bottom: 0;
   width: calc((100vw - 200px) * 0.3);
   border-radius: 30px;
-  max-height: calc(100vh - 60px);
   overflow-y: auto;
   background-color: #fff;
   border: 1px solid #ddd;
-  padding: 20px 0;
   z-index: auto;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
 }
