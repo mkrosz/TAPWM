@@ -431,7 +431,11 @@ ul {
 
   .image-container img:nth-child(n+2) {
     display: none;
-}
+  }
+
+  .sidebar {
+    display: none;
+  }
 
   .curiosidades-container {
     width: 90%;
@@ -461,6 +465,10 @@ ul {
 
 /* Estilos para tablets */
 @media (min-width: 601px) and (max-width: 1092px) {
+
+  .sidebar {
+    display: none;
+  }
 
   .curiosidades ul {
     margin-left: 55px;
