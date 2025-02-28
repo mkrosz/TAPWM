@@ -425,7 +425,7 @@ ul {
 /* Estilos para dispositivos móveis */
 @media (max-width: 600px) {
   .image-container {
-    width: 400px;
+    width: 200px;
     grid-template-columns: 1fr;
   }
 
