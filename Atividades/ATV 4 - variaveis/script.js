@@ -1,10 +1,10 @@
+let resultNome = prompt("Qual é o seu nome?");
+let resultNota1 = parseFloat(prompt("Digite sua primeira nota:"));
+let resultNota2 = parseFloat(prompt("Digite sua segunda nota:"));
+let resultNota3 = parseFloat(prompt("Digite sua terceira nota:"));
 
-resultNome = prompt("Qual é o seu nome?");
-resultNota1 = prompt("Digite sua primeira nota:");
-resultNota2 = prompt("Digite sua segunda nota:");
-resultNota3 = prompt("Digite sua terceira nota:");
+let media = (resultNota1 + resultNota2 + resultNota3) / 3;
 
+let resultadoFinal = `Aluno: ${resultNome} - Média das notas: ${media.toFixed(2)}`;
 
-resultadoFinal = resultNome + parseFloat(resultNota1) + parseFloat(resultNota2) + parseFloat(resultNota3);
-
-return resultadoFinal;
+alert(resultadoFinal);
