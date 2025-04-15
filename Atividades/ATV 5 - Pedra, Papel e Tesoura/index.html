@@ -1,13 +1,42 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pedra, Papel e Tesoura</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
-    
+    <div class="placar">
+        <span id="humano-label">Humano</span>
+        < class="score">
+            <span id="pontos-humano">0</span> | <span id="pontos-computador">0</span>
+        </span>
+        <span id="computador-label">Computador</span>
+    </div>
+
+    <div id="mensagem-jokenpo" class="mensagem-grande">Faça sua escolha!</div>
+
+    <div class="area-maos">
+        <div class="mao" id="mao-humano">
+            <img id="img-humano" src="./assets/pedra.png" alt="" />
+            <div id="resultado-humano" class="resultado"></div>
+        </div>
+        <div class="mao" id="mao-computador">
+            <img id="img-computador" src="./assets/pedra.png" alt="" />
+            <div id="resultado-computador" class="resultado"></div>
+        </div>
+    </div>
+
+    <div class="botoes">
+        <button onclick="jogar('pedra')">🪨<br />Pedra</button>
+        <button onclick="jogar('papel')">📄<br />Papel</button>
+        <button onclick="jogar('tesoura')">✂️<br />Tesoura</button>
+    </div>
+
     <script src="script.js"></script>
 </body>
+
 </html>

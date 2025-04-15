@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Orbitron:wght@400..900&family=Tilt+Warp&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Kanit', sans-serif;
+    text-align: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    background: linear-gradient(to right, #add8e6 50%, #ff1e00 50%);
+}
+
+/* Topo - nomes dos jogadores */
+.placar {
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    font-size: 24px;
+    padding: 0 40px;
+    margin-top: 10px;
+}
+
+/* Contador grande no centro da tela */
+.score {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 60px;
+    font-weight: bold;
+}
+
+/* Mensagem "JÔ QUEM PÔ" ou resultado */
+.mensagem-grande {
+    color: #fff;
+    margin-top: 20px;
+    font-family: 'Tilt Warp', cursive;
+    font-size: 28px;
+    font-weight: bold;
+    min-height: 40px;
+}
+
+/* Área das mãos */
+.area-maos {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.mao {
+    text-align: center;
+}
+
+.mao img {
+    width: 16rem;
+    height: 16rem;
+    object-fit: contain;
+}
+
+/* REMOVE ISSO */
+#img-humano {
+    transform: scaleX(-1);
+}
+
+@keyframes sacudir-vertical {
+    0% {
+        transform: translateY(0);
+    }
+
+    30% {
+        transform: translateY(-20px);
+    }
+
+    60% {
+        transform: translateY(20px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes sacudir-vertical-invertido {
+    0% {
+        transform: scaleX(-1) translateY(0);
+    }
+
+    30% {
+        transform: scaleX(-1) translateY(-20px);
+    }
+
+    60% {
+        transform: scaleX(-1) translateY(20px);
+    }
+
+    100% {
+        transform: scaleX(-1) translateY(0);
+    }
+}
+
+.sacudir-uma {
+    animation: sacudir-vertical 0.4s ease;
+}
+
+.sacudir-uma-invertido {
+    animation: sacudir-vertical-invertido 0.4s ease;
+}
+
+/* Rótulos de vencedor/perdedor */
+.resultado {
+    margin-top: 10px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.resultado.vencedor {
+    color: rgb(255, 255, 255);
+}
+
+.resultado.perdedor {
+    color: rgb(255, 255, 255);
+}
+
+/* Botões no rodapé centralizados */
+.botoes {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.botoes button {
+    color: #fff;
+    font-size: 18px;
+    width: 9rem;
+    height: 9rem;
+    padding: 15px 20px;
+    border-radius: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.227);
+    background-color: #ffffff1f;
+    cursor: pointer;
+    transition: background 0.5s;
+}
+
+.botoes button:hover {
+    border: 2px solid rgba(255, 255, 255, 0.227);
+    background-color: #0000003d;
+}
+
+.botoes button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
