@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Teste NaN</title>
+
+    <script>
+               
+         // testar depois com 10/0, veja que dá diferente
+         // pois 0/0 --> NaN mas 10/0 --> infinity
+        let numero = 0/0;
+        
+        
+        if (Number.isNaN(numero)) {
+            alert(" teste1 - é não número - verdadeiro");
+        } else {
+            alert("teste1 - não é não número - falso");
+        }
+
+        /** situações
+        NaN === NaN; // falso 
+        Number.NaN === NaN; // falso 
+        isNaN(NaN); // verdadeiro 
+        isNaN(Number.NaN); // verdadeiro
+        **/
+
+        if (numero === numero) {
+
+            alert("teste2 - verdadeiro");
+        } else {
+            alert("teste2 - falso");
+
+        }
+
+        if (numero.NaN === numero) {
+
+            alert("teste3 - verdadeiro");
+        } else {
+            alert("teste3 - falso");
+
+        }
+
+        if (isNaN(numero)) {
+            alert("teste4 - verdadeiro");
+        } else {
+            alert("teste4 - falso");
+
+        }
+
+
+        if (isNaN(Number.numero)) {
+            alert("teste5 - verdadeiro");
+        } else {
+            alert("teste5 - falso");
+
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
