@@ -13,3 +13,8 @@ site: https://jokempo-eight.vercel.app
 
 ### Certificado IA Saúde
 #### expedido em 28/02/2025
+
+#
+
+### Certificado IA Mobi
+#### expedido em 17/03/2025
