@@ -1,0 +1,120 @@
+:root {
+    --cor-fundo: #FFFDF6;
+    --cor-container: #328E6E;
+    --cor-botao: #DDEB9D;
+    --cor-botao-hover: #A0C878;
+    --cor-texto: #333;
+    --cor-texto2: #FAF6E9;
+    --shadown: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--cor-fundo);
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    width: 100vw;
+    height: 100vh;
+}
+
+.formulario {
+    flex: 1;
+    margin: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.formulario h1 {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 30px;
+    font-size: 22px;
+}
+
+label {
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: var(--cor-texto);
+}
+
+input {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    margin-bottom: 20px;
+    width: 100%;
+    font-size: 14px;
+}
+
+button {
+    background-color: var(--cor-botao);
+    color: black;
+    border: none;
+    padding: 12px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: var(--cor-botao-hover);
+}
+
+.resultado-box {
+    flex: 1.2;
+    background-color: var(--cor-container);
+    border-radius: 50px;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+.resultado-box img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    display: none;
+}
+
+.texto-explicacao {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--cor-texto);
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        height: auto;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .resultado-box {
+        margin-top: 30px;
+        height: auto;
+    }
+}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What´s this shape?</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="formulario">
+            <h1>QUAL TIPO<br>DE TRIÂNGULO É??</h1>
+
+            <label for="ladoA">Primeiro lado</label>
+            <input type="text" id="ladoA">
+
+            <label for="ladoB">Segundo lado</label>
+            <input type="text" id="ladoB">
+
+            <label for="ladoC">Terceiro lado</label>
+            <input type="text" id="ladoC">
+
+            <button onclick="verificarTriangulo()">Verificar tipo de triângulo</button>
+        </div>
+
+        <div class="resultado-box">
+            <img id="imagemTriangulo" src="" alt="Tipo de triângulo">
+            <div class="texto-explicacao" id="resultado"></div>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+
+</html>

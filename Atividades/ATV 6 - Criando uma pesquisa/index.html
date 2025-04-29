@@ -1,13 +1,46 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tela de form</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
-    
-<script src="./script.js"></script>
+    <h2>Pesquisa de Opinião sobre o Filme</h2>
+
+    <form id="surveyForm">
+        <label>Idade:
+            <input type="number" id="idade" required min="0">
+        </label>
+
+        <label>Sexo:
+            <select id="sexo" required>
+                <option value="">Selecione</option>
+                <option value="Masculino">Masculino</option>
+                <option value="Feminino">Feminino</option>
+                <option value="Outros">Outros</option>
+            </select>
+        </label>
+
+        <label>Opinião sobre o filme:
+            <select id="opiniao" required>
+                <option value="">Selecione</option>
+                <option value="4">4 - Ótimo</option>
+                <option value="3">3 - Bom</option>
+                <option value="2">2 - Normal</option>
+                <option value="1">1 - Péssimo</option>
+            </select>
+        </label>
+
+        <button type="submit">Enviar Resposta</button>
+    </form>
+
+    <div class="result" id="resultado"></div>
+
+    <script src="./script.js"></script>
 </body>
+
 </html>
