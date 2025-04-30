@@ -93,9 +93,11 @@ button:hover {
 }
 
 .resultado-box img {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 20px;
+    max-width: 60%;
+    max-height: 60%;
+    background-size: cover;
+    align-items: center;
+    margin: 0 0 20px 8rem;
     display: none;
 }
 

@@ -10,7 +10,7 @@ function verificarTriangulo() {
 
   if (isNaN(a) || isNaN(b) || isNaN(c)) {
     resultado.innerHTML = "Por favor, insira apenas números válidos.";
-    imagem.src = "img/erro.png";
+    imagem.src = "img/erro.jpg";
     imagem.alt = "Erro de entrada";
     imagem.style.display = "block";
     return;
@@ -19,7 +19,7 @@ function verificarTriangulo() {
   if (a + b <= c || a + c <= b || b + c <= a) {
     resultado.innerHTML =
       "Esses valores não formam um triângulo. A soma de dois lados deve ser sempre maior que o terceiro.";
-    imagem.src = "img/invalido.png"; // imagem de triângulo impossível
+    imagem.src = "img/invalido.jpg"; // imagem de triângulo impossível
     imagem.alt = "Triângulo inválido";
     imagem.style.display = "block";
     return;
@@ -31,15 +31,15 @@ function verificarTriangulo() {
   if (a === b && b === c) {
     tipo = "Equilátero";
     explicacao = "Todos os lados são iguais.";
-    imagemUrl = "img/equilatero.png";
+    imagemUrl = "img/equilatero.jpg";
   } else if (a === b || a === c || b === c) {
     tipo = "Isósceles";
     explicacao = "Dois lados são iguais e um é diferente.";
-    imagemUrl = "img/isosceles.png";
+    imagemUrl = "img/isosceles.jpg";
   } else {
     tipo = "Escaleno";
     explicacao = "Todos os lados têm medidas diferentes.";
-    imagemUrl = "img/escaleno.png";
+    imagemUrl = "img/escaleno.jpg";
   }
 
   resultado.innerHTML = `Este é um triângulo <strong>${tipo}</strong>.<br>${explicacao}`;
