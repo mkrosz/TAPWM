@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usando Objetos</title>
+</head>
+
+<body>
+    <script>
+        // Criando um objeto usando a função construtora Object()
+        var aluno1 = new Object();
+
+        // Adicionando propriedades ao objeto
+        aluno1.ra = "0031432512026";
+        aluno1.nome = "Ronaldo";
+
+        // Exibindo as propriedades do objeto
+        alert("RA: " + aluno1.ra + "\nNome: " + aluno1.nome);
+
+        // Adicionando mais uma propriedade
+        aluno1.email = "ronaldo@gmail.com";
+
+        // Exibindo a nova propriedade usando notação de colchetes
+        alert(aluno1["email"]);
+
+        // Criando um objeto usando a notação literal de objetos
+        var aluno2 = {};
+
+        // Adicionando propriedades usando notação de colchetes
+        aluno2["ra"] = "0031432512022";
+        aluno2["nome"] = "Mike";
+
+        // Exibindo as propriedades
+        alert("RA: " + aluno2.ra + "\nNome: " + aluno2.nome);
+
+        // Adicionando uma propriedade com espaço no nome (só pode ser acessada com colchetes)
+        aluno2["email do aluno"] = "mikewillyf@gmail.com";
+
+        // Exibindo a propriedade com espaço
+        alert(aluno2["email do aluno"]);
+
+        // Criando e inicializando um objeto diretamente com a notação literal
+        var aluno3 = {
+            ra: "0031432512002",
+            nome: "Isadora",
+            email: "isadoracorrea@gmail.com",
+        }
+
+        // Exibindo as propriedades
+        alert("RA: " + aluno3.ra + "\nNome: " + aluno3.nome);
+        alert(aluno3["email"]);
+
+        // Criando uma função construtora para objetos do tipo Aluno
+        function Aluno(ra, nome, email) {
+            // Propriedades do objeto
+            this.ra = ra;
+            this.nome = nome;
+
+            // Método do objeto
+            this.MostrarDados = function () {
+                alert("RA: " + this.ra + "\nNome: " + this.nome);
+            }
+        }
+
+        // Criando um novo objeto usando a função construtora
+        var aluno4 = new Aluno("0031432512006", "Karina");
+
+        // Chamando o método do objeto (mostra dados)
+        alert(aluno4.MostrarDados());
+
+        // Acessando diretamente uma propriedade
+        alert(aluno4.nome);
+
+        // Criando um objeto vazio
+        var aluno5 = {};
+
+        // Criando uma propriedade dinamicamente usando variável
+        var nome_propriedade = "ra";
+        aluno5[nome_propriedade] = "0031432512015";
+
+        // Criando outra propriedade normalmente
+        aluno5['nome'] = "Nicolly";
+
+        // Exibindo as propriedades
+        alert("RA: " + aluno5.ra + "\nNome: " + aluno5.nome);
+
+        // Criando uma função construtora com encapsulamento (getters e setters)
+        function Aluno2() {
+            // Propriedades privadas (não diretamente acessíveis)
+            var ra;
+            var nome;
+
+            // Setter para ra
+            this.setRa = function (value) {
+                this.ra = value;
+            }
+
+            // Getter para ra
+            this.getRa = function () {
+                return this.ra;
+            }
+
+            // Setter para nome
+            this.setNome = function (value) {
+                this.nome = value;
+            }
+
+            // Getter para nome
+            this.getNome = function () {
+                return this.nome;
+            }
+        }
+
+        // Criando um objeto usando a função construtora Aluno2
+        var aluno6 = new Aluno2();
+
+        // Definindo valores através dos setters
+        aluno6.setRa("0031432512017");
+        aluno6.setNome("Rafaela");
+
+        // Exibindo valores através dos getters
+        alert("RA: " + aluno6.getRa() + "\nNome: " + aluno6.getNome());
+
+        // Criando uma função construtora AlunoADS com encapsulamento
+        function AlunoADS() {
+            var numLab;
+
+            // Setter para numLab
+            this.setNumLab = function (value) {
+                this.numLab = value;
+            }
+
+            // Getter para numLab
+            this.getNumLab = function () {
+                return this.numLab;
+            }
+        }
+
+        // Aplicando herança: AlunoADS herda de Aluno2
+        AlunoADS.prototype = new Aluno2();
+
+        // Criando um objeto a partir de AlunoADS
+        var aluno7 = new AlunoADS();
+
+        // Usando métodos herdados de Aluno2
+        aluno7.setNome("Andreus");
+        aluno7.setRa("0031432512007");
+
+        // Usando método da própria AlunoADS
+        aluno7.setNumLab(5);
+
+        // Exibindo todas as informações do objeto
+        alert("RA: " + aluno7.getRa() + "\nNome: " + aluno7.getNome() + "\nLaboratório: " + aluno7.getNumLab());
+
+        // Criando uma classe moderna com ES6 (sintaxe de classes)
+        class Aluno1 {
+            // Método construtor
+            constructor() {
+                this._ra;   // Convenção: underline indica propriedade privada
+                this._nome;
+            }
+
+            // Setter para ra
+            setRa(value) {
+                this._ra = value;
+            }
+
+            // Getter para ra
+            getRa() {
+                return this._ra;
+            }
+
+            // Setter para nome
+            setNome(value) {
+                this._nome = value;
+            }
+
+            // Getter para nome
+            getNome() {
+                return this._nome;
+            }
+        }
+
+        // Criando um objeto a partir da classe
+        var objAluno = new Aluno1();
+
+        // Usando os métodos da classe
+        objAluno.setNome("Bruna");
+        objAluno.setRa("0031432512001");
+
+        // Exibindo os dados usando template string (ES6)
+        alert(`RA: ${objAluno.getNome()}\nNome: ${objAluno.getRa()}`);
+
+        class AlunoADS1 extends Aluno1 {
+            constructor() {
+                super(); // Chama o construtor da classe pai
+                this._numLab; // Propriedade específica de AlunoADS1
+            }
+
+            // Setter para numLab
+            setNumLab(value) {
+                this._numLab = value;
+            }
+
+            // Getter para numLab
+            getNumLab() {
+                return this._numLab;
+            }
+        }
+        var objAlunoADS = new AlunoADS1();
+        objAlunoADS.setNome("Isabella");
+        objAlunoADS.setRa("0031432512005");
+        objAlunoADS.setNumLab(6);
+
+        alert(`RA: ${objAlunoADS.getRa()}\nNome: ${objAlunoADS.getNome()}\nLaboratório: ${objAlunoADS.getNumLab()}`);
+
+        //cópia de objetos
+        var obj1 = new Object();
+        var obj2 = obj1; // obj2 é uma referência ao mesmo objeto que obj1
+        obj1.nome = "Matheus";
+        alert("obj1 nome: " + obj1.nome); // Matheus
+
+        // Método para mostrar objetos públicos e privados
+        class ContaBancaria {
+            #cpf // Propriedade privada usando # (ES2022)
+
+            constructor(nome, saldoInicial) {
+                this.nome = nome; // Propriedade privada
+                this.saldo = saldoInicial; // Propriedade pública
+            }
+
+            setCpf(value) {
+                this.#cpf = value; // Setter para a propriedade privada
+            }
+            getCpf() {
+                return this.#cpf; // Getter para a propriedade privada
+            }
+            getSaldo() {
+                return this.saldo; // Getter para o saldo
+            }
+
+            //método público
+            depositar(valor) {
+                this.saldo += valor; // Método público para depositar
+                this.#registrarTransacao(valor);
+                // Utilizando o modificador # para acessar a propriedade privada
+
+            }
+
+            //método privado
+            #registrarTransacao(valor) {
+                console.log(`Depósito de R$ ${valor} realizado. Novo saldo: R$ ${this.saldo} para o cpf: ${this.getCpf()} ou ${this.#cpf}`); // Método privado para registrar transações    
+            }
+        }
+
+        const conta = new ContaBancaria("Carlos", 1000);
+        conta.setCpf("123.456.789-00"); // Definindo o CPF
+        conta.depositar(50); // Depositando dinheiro
+        console.log(`Saldo atual: R$ ${conta.getSaldo()}`); // Exibindo o saldo atual
+
+        const arr = [
+            ['codigo', 1],
+            ['nome', 'João'],
+            ['idade', 23],
+        ];
+        const obj = Object.fromEntries(arr); // Converte o array de pares chave-valor em um objeto
+        console.log(obj);
+        alert("Nome: " + obj.nome);
+        alert(JSON.stringify(obj)); // Converte o objeto em uma string JSON
+
+        //alteração no prototipo reflete no novo
+        const objEmpresa = {
+            empresa: 'ZF do Brasil'
+        };
+
+        // Cria um novo objeto com objEmpresa como protótipo
+        const funcionario = Object.create(objEmpresa, {
+            nome: {
+                value: 'José Carlos'
+            },
+            endereco: {
+                value: 'Av. São paulo'
+            }
+        })
+        console.log(funcionario.empresa); // 'ZF do Brasil'
+    </script>
+</body>
+
+</html>
