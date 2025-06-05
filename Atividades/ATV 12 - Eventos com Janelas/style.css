@@ -5,6 +5,15 @@ body {
     background-color: #e2d4c9;
 }
 
+#janela-hitbox {
+    position: absolute;
+    top: 90px;
+    left: 68px;
+    width: 205px;
+    height: 305px;
+    cursor: pointer;
+}
+
 #overlay {
     position: fixed;
     top: 0;
@@ -46,24 +55,19 @@ body {
     height: auto;
     transition: transform 0.5s ease, filter 0.5s ease, opacity 0.5s ease;
     cursor: pointer;
-    /* Remove borda ou fundo para respeitar transparência */
     background: transparent;
     border: none;
     outline: none;
 }
 
-/* Efeito abrir: leve elevação */
 #janela.abrindo {
     transform: translateY(-5px);
     opacity: 0.95;
-    /* Opcional: um leve drop-shadow para dar profundidade */
     filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.2));
 }
 
-/* Efeito quebrar: animação de tremor, sem sombra quadrada */
 #janela.quebrando {
     animation: quebrar 0.5s ease forwards;
-    /* sombra leve na borda para dar efeito */
     filter: drop-shadow(0 0 3px rgba(255, 50, 50, 0.8));
 }
 
@@ -94,9 +98,8 @@ body {
     }
 }
 
-/* Efeito consertando: brilho suave ao redor, respeitando transparência */
 #janela.consertando {
-    animation: brilhoConserto 1s ease forwards;
+    animation: brilhoConserto 2s ease forwards;
 }
 
 @keyframes brilhoConserto {
@@ -111,6 +114,7 @@ body {
     100% {
         filter: drop-shadow(0 0 0 rgba(255, 255, 200, 0));
     }
+    
 }
 
 #martelo {
