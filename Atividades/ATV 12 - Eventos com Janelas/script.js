@@ -3,7 +3,7 @@ const statusText = document.getElementById("status");
 const martelo = document.getElementById("martelo");
 const iniciarBtn = document.getElementById("iniciar");
 const overlay = document.getElementById("overlay");
-const hitbox = document.getElementById("janela-hitbox"); // precisa ter o elemento hitbox no HTML
+const hitbox = document.getElementById("janela-hitbox");
 
 let estado = "fechada";
 let interacaoLiberada = false;
@@ -25,7 +25,6 @@ iniciarBtn.addEventListener("click", () => {
   console.log("Interação liberada! Sons podem ser reproduzidos.");
 });
 
-// A interação visual continua na hitbox
 hitbox.addEventListener("mouseenter", () => {
   if (!interacaoLiberada) return;
 
@@ -72,12 +71,12 @@ martelo.addEventListener("dragstart", (e) => {
     e.preventDefault();
     return;
   }
-  hitbox.style.pointerEvents = "none"; // Desativa a hitbox enquanto arrasta
+  hitbox.style.pointerEvents = "none";
   e.dataTransfer.setData("text/plain", "martelo");
 });
 
 martelo.addEventListener("dragend", () => {
-  hitbox.style.pointerEvents = "auto"; // Reativa a hitbox depois
+  hitbox.style.pointerEvents = "auto";
 });
 
 janela.addEventListener("dragover", (e) => {
