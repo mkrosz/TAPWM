@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Texto</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <form>
+        <div>
+            <h1>Conversor de Texto</h1>
+            <label for="textoInput">Digite seu texto:</label>
+            <input type="text" id="textoInput">
+
+            <div class="radio-group">
+                <label>
+                    <input type="radio" name="caseConverter" onclick="converterTexto('maiusculas')">
+                    Maiúsculas
+                </label>
+                <label>
+                    <input type="radio" name="caseConverter" onclick="converterTexto('minusculas')">
+                    Minúsculas
+                </label>
+            </div>
+
+            <div class="button-group">
+                <input type="reset" value="Redefinir">
+            </div>
+        </div>
+    </form>
+</body>
+
+</html>
