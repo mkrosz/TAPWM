@@ -1,147 +1,610 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cursos FATEC Sorocaba</title>
+    <!-- Importa a fonte Kanit do Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Link para a biblioteca do Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
+        /* Define as variáveis de cores para a paleta escura */
+        :root {
+            --bg-dark: #0d0d0d;
+            --bg-secondary: #1a1a1a;
+            --text-light: #ffffff;
+            --text-gray: #b0b0b0;
+            --heading-color: #009688;
+            --tag-bg: #333333;
+            --highlight-color: rgb(0, 255, 205);
+        }
+
+        /* Define a cor de fundo e a cor do texto ao selecionar o conteúdo */
+        ::selection {
+            background-color: var(--highlight-color);
+            color: black;
+        }
+        
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Kanit', sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            height: 100vh;
+            justify-content: flex-start; /* Alinha o conteúdo no topo */
+            min-height: 100vh; /* Garante que o corpo ocupe pelo menos a altura da tela */
+            padding-top: 50px; /* Adiciona um espaço do topo */
             margin: 0;
-            background-color: #f0f0f0;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            position: relative;
         }
-
         h1 {
-            color: #333;
+            color: var(--heading-color);
         }
 
-        select {
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
+        /* -----------------------
+        Estilos do seletor personalizado
+        ----------------------- */
+        .custom-select-container {
+            position: relative;
+            width: 300px;
+        }
+
+        .custom-select-header {
+            padding: 5px;
+            font-size: 14px;
+            border: 1px solid var(--text-light);
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 30px;
+            transition: background-color 0.3s;
+        }
+
+        .custom-select-header:hover {
+            background-color: var(--bg-secondary);
+        }
+
+        .custom-select-header .arrow {
+            font-size: 14px;
+            transition: transform 0.3s;
+        }
+        .custom-select-header.active .arrow {
+            transform: rotate(180deg);
+        }
+
+        .custom-options-list {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            border: 1px solid var(--text-light);
+            border-top: none;
+            background-color: var(--bg-dark);
+            z-index: 10;
+            display: none;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            border-radius: 0 0 30px 30px;
+        }
+
+        .custom-options-list.active {
+            display: block;
+        }
+
+        .custom-option {
+            padding: 5px 10px;
+            font-size: 12px;
+            cursor: pointer;
+            border-bottom: 1px solid var(--bg-secondary);
+            transition: background-color 0.2s;
+        }
+        /* Estilo para a última opção para remover a borda inferior */
+        .custom-options-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Estilo de hover e selecionado para as opções personalizadas */
+        .custom-option:hover,
+        .custom-option.selected {
+            background-color: var(--highlight-color);
+            color: black;
         }
 
         label {
             margin-bottom: 10px;
             font-size: 18px;
         }
+
+        /* Estilos do rodapé */
+        .main-footer, .footer {
+            width: 100%;
+            background-color: var(--bg-secondary); /* Cor de fundo igual para ambos os footers */
+            color: var(--text-gray);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+            border-top: 2px solid var(--text-light); /* Borda branca superior */
+            border-radius: 15px 15px 0 0; /* Cantos arredondados superiores */
+        }
+        .main-footer {
+            position: absolute;
+            bottom: 0;
+        }
+        .footer-info, .footer-social {
+            text-align: left;
+        }
+        .footer-social {
+            text-align: right;
+        }
+        .main-footer h4, .main-footer p, .footer h4, .footer p {
+            margin: 0;
+            padding: 2px 0;
+        }
+        .social-icons a {
+            color: var(--text-light);
+            margin-left: 15px;
+            font-size: 24px;
+        }
+
+        /* Estilos para o modal personalizado */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0.3s, opacity 0.3s;
+            z-index: 1000;
+        }
+        .modal-overlay.show {
+            visibility: visible;
+            opacity: 1;
+        }
+        .modal-box {
+            background-color: var(--bg-secondary);
+            color: var(--text-light);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .modal-box p {
+            margin-bottom: 20px;
+        }
+        .modal-buttons {
+            display: flex;
+            justify-content: flex-end; /* Alinha os botões à direita */
+            gap: 10px; /* Espaçamento entre os botões */
+        }
+        .modal-box button {
+            padding: 10px 20px;
+            border-radius: 15px; /* Deixa os botões mais arredondados */
+            cursor: pointer;
+            transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+            font-size: 16px;
+        }
+        /* Estilos do botão de confirmação */
+        #modal-confirm {
+            background-color: var(--highlight-color);
+            color: black;
+            border: none;
+        }
+        #modal-confirm:hover {
+            background-color: rgb(0, 220, 180);
+        }
+        /* Estilos do botão de cancelamento */
+        #modal-cancel {
+            background-color: var(--bg-secondary);
+            color: var(--text-light);
+            border: 1px solid var(--text-light); /* Borda branca */
+        }
+        #modal-cancel:hover {
+            background-color: var(--tag-bg);
+        }
+
+        /* Adaptação para telas menores */
+        @media (max-width: 768px) {
+            .main-footer, .footer {
+                flex-direction: column;
+                text-align: center;
+            }
+            .footer-info, .footer-social {
+                text-align: center;
+            }
+            .social-icons {
+                margin-top: 10px;
+            }
+        }
     </style>
 </head>
-
 <body>
 
     <h1>Cursos FATEC Sorocaba</h1>
 
     <label for="cursos">Selecione um curso:</label>
-    <select name="cursos" id="cursos" onchange="abrirCurso()">
-        <option value="">--Selecione--</option>
-        <option value="ads">Análise e Desenvolvimento de Sistemas</option>
-        <option value="si">Sistemas para Internet</option>
-        <option value="polimeros">Polímeros</option>
-        <option value="fabrica">Fabricação Mecânica</option>
-        <option value="logistica">Logística</option>
-        <option value="rh">Gestão de Recursos Humanos</option>
-        <option value="papeis">Papéis e Celulose</option>
-    </select>
+    <!-- Seletor de cursos customizado -->
+    <div class="custom-select-container">
+        <div class="custom-select-header">
+            <span class="selected-value">--Selecione--</span>
+            <span class="arrow">&#9660;</span>
+        </div>
+        <ul class="custom-options-list">
+            <!-- As opções serão inseridas aqui via JavaScript -->
+        </ul>
+    </div>
+    
+    <!-- Modal de confirmação personalizado -->
+    <div id="confirmation-modal" class="modal-overlay">
+        <div class="modal-box">
+            <p id="modal-message"></p>
+            <div class="modal-buttons">
+                <button id="modal-confirm">Sim</button>
+                <button id="modal-cancel">Não</button>
+            </div>
+        </div>
+    </div>
 
     <script>
-        // Esta função é chamada pelo evento onchange do menu suspenso no HTML
-        function abrirCurso() {
-            // Objeto para armazenar as informações de cada curso de forma organizada
-            const infoCursos = {
-                ads: {
-                    titulo: "Análise e Desenvolvimento de Sistemas",
-                    info: "O tecnólogo em Análise e Desenvolvimento de Sistemas projeta, documenta, especifica, testa e implanta sistemas computacionais de informação. Atua na gestão de projetos de software, aplicando metodologias e ferramentas para o ciclo de vida de desenvolvimento."
-                },
-                si: {
-                    titulo: "Sistemas para Internet",
-                    info: "O tecnólogo em Sistemas para Internet desenvolve e projeta sites, portais, e-commerces e aplicativos para a web. Atua com linguagens de programação, bancos de dados e frameworks para criar soluções dinâmicas e interativas na internet."
-                },
-                polimeros: {
-                    titulo: "Polímeros",
-                    info: "O tecnólogo em Polímeros atua no desenvolvimento, produção e controle de qualidade de materiais poliméricos, como plásticos e borrachas. O profissional pode trabalhar em indústrias automotivas, de embalagens, farmacêuticas e outras que utilizam esses materiais."
-                },
-                fabrica: {
-                    titulo: "Fabricação Mecânica",
-                    info: "O tecnólogo em Fabricação Mecânica atua no planejamento, execução e controle de processos de fabricação. O profissional opera e programa máquinas-ferramenta, como tornos CNC, e garante a qualidade na produção de peças e componentes mecânicos."
-                },
-                logistica: {
-                    titulo: "Logística",
-                    info: "O tecnólogo em Logística gerencia operações de transporte, estoque e distribuição. O profissional planeja rotas, controla o fluxo de materiais e informações, e busca otimizar a cadeia de suprimentos para reduzir custos e aumentar a eficiência."
-                },
-                rh: {
-                    titulo: "Gestão de Recursos Humanos",
-                    info: "O tecnólogo em Gestão de Recursos Humanos planeja e gerencia as estratégias de pessoal de uma organização. O profissional atua com recrutamento, seleção, treinamento, avaliação de desempenho e políticas de benefícios para aprimorar o ambiente de trabalho."
-                },
-                papeis: {
-                    titulo: "Papéis e Celulose",
-                    info: "O tecnólogo em Papéis e Celulose atua no processo produtivo desde a extração da celulose até a fabricação de diferentes tipos de papéis. O profissional gerencia a operação de máquinas e o controle de qualidade do produto final."
-                }
-            };
-
-            const select = document.getElementById('cursos');
-            const cursoSelecionado = select.value;
-
-            // Se a opção inicial "--Selecione--" for escolhida, a função não faz nada
-            if (cursoSelecionado === "") {
-                return;
+        const infoCursos = {
+            ads: {
+                titulo: "Análise e Desenvolvimento de Sistemas",
+                tipoCurso: "Curso Superior de Tecnologia",
+                modalidade: "Presencial",
+                eixo: "Informação e Comunicação",
+                duracao: "6 ou 8 semestres",
+                info: "O tecnólogo em Análise e Desenvolvimento de Sistemas projeta, documenta, especifica, testa e implanta sistemas computacionais de informação. Atua na gestão de projetos de software, aplicando metodologias e ferramentas para o ciclo de vida de desenvolvimento."
+            },
+            "ads-ams": {
+                titulo: "Desenvolvimento de Sistemas – AMS",
+                tipoCurso: "Articulação da Formação Profissional Média e Superior (AMS)",
+                modalidade: "Presencial",
+                eixo: "Informação e Comunicação",
+                duracao: "3 semestres",
+                info: "Um programa que integra o ensino técnico com o superior, oferecendo uma formação rápida e completa em desenvolvimento de sistemas."
+            },
+            eletronica: {
+                titulo: "Eletrônica Automotiva",
+                tipoCurso: "Curso Superior de Tecnologia",
+                modalidade: "Presencial",
+                eixo: "Controle e Processos Industriais",
+                duracao: "6 semestres",
+                info: "Prepara profissionais para atuar na manutenção, diagnóstico e reparação de sistemas eletrônicos em veículos automotivos, desde o design até a automação."
+            },
+            fabrica: {
+                titulo: "Fabricação Mecânica",
+                tipoCurso: "Curso Superior de Tecnologia",
+                modalidade: "Presencial",
+                eixo: "Produção Industrial",
+                duracao: "6 semestres",
+                info: "O tecnólogo em Fabricação Mecânica atua no planejamento, execução e controle de processos de fabricação. O profissional opera e programa máquinas-ferramenta, como tornos CNC, e garante a qualidade na produção de peças e componentes mecânicos."
+            },
+            qualidade: {
+                titulo: "Gestão da Qualidade",
+                tipoCurso: "Curso Superior de Tecnologia",
+                modalidade: "Presencial",
+                eixo: "Gestão e Negócios",
+                duracao: "6 semestres",
+                info: "Forma profissionais para gerenciar a qualidade em processos produtivos e de serviços, aplicando normas e ferramentas de controle para a melhoria contínua."
+            },
+            "gestao-ead": {
+                titulo: "Gestão Empresarial – EAD",
+                tipoCurso: "Curso Superior de Tecnologia",
+                modalidade: "à Distância (EAD)",
+                eixo: "Gestão e Negócios",
+                duracao: "6 semestres",
+                info: "Prepara gestores para atuar em diversas áreas da administração, como marketing, finanças e recursos humanos, de forma flexível através do ensino a distância."
+            },
+            logistica: {
+                titulo: "Logística",
+                tipoCurso: "Curso Superior de Tecnologia",
+                modalidade: "Presencial",
+                eixo: "Gestão e Negócios",
+                duracao: "6 semestres",
+                info: "O tecnólogo em Logística gerencia operações de transporte, estoque e distribuição. O profissional planeja rotas, controla o fluxo de materiais e informações, e busca otimizar a cadeia de suprimentos para reduzir custos e aumentar a eficiência."
+            },
+            "logistica-ams": {
+                titulo: "Logística – AMS",
+                tipoCurso: "Articulação da Formação Profissional Média e Superior (AMS)",
+                modalidade: "Presencial",
+                eixo: "Gestão e Negócios",
+                duracao: "3 semestres",
+                info: "Programa que visa integrar a formação técnica de nível médio com o ensino superior em Logística, acelerando a entrada do estudante no mercado de trabalho."
+            },
+            manufatura: {
+                titulo: "Manufatura Avançada",
+                tipoCurso: "Curso Superior de Tecnologia",
+                modalidade: "Presencial",
+                eixo: "Controle e Processos Industriais",
+                duracao: "6 semestres",
+                info: "Foca em tecnologias modernas de produção, como automação, robótica e manufatura aditiva (impressão 3D), para otimizar processos industriais."
+            },
+            aeronaves: {
+                titulo: "Manutenção de Aeronaves",
+                tipoCurso: "Curso Superior de Tecnologia",
+                modalidade: "Presencial",
+                eixo: "Controle e Processos Industriais",
+                duracao: "6 semestres",
+                info: "O tecnólogo em Manutenção de Aeronaves atua no planejamento, execução e controle de processos de manutenção de aeronaves, garantindo a segurança e a confiabilidade dos equipamentos."
+            },
+            polimeros: {
+                titulo: "Polímeros",
+                tipoCurso: "Curso Superior de Tecnologia",
+                modalidade: "Presencial",
+                eixo: "Produção Industrial",
+                duracao: "6 semestres",
+                info: "O tecnólogo em Polímeros atua no desenvolvimento, produção e controle de qualidade de materiais poliméricos, como plásticos e borrachas. O profissional pode trabalhar em indústrias automotivas, de embalagens, farmacêuticas e outras que utilizam esses materiais."
+            },
+            metalurgicos: {
+                titulo: "Processos Metalúrgicos",
+                tipoCurso: "Curso Superior de Tecnologia",
+                modalidade: "Presencial",
+                eixo: "Controle e Processos Industriais",
+                duracao: "6 semestres",
+                info: "Profissionais com conhecimentos em extração, produção e transformação de metais e ligas metálicas. Atuam no controle de qualidade e em processos de fundição, laminação e forjamento."
+            },
+            projetos: {
+                titulo: "Projetos Mecânicos",
+                tipoCurso: "Curso Superior de Tecnologia",
+                modalidade: "Presencial",
+                eixo: "Produção Industrial",
+                duracao: "6 semestres",
+                info: "Prepara o tecnólogo para atuar no desenvolvimento de projetos de máquinas, equipamentos e produtos industriais, utilizando softwares de design e simulação."
+            },
+            biomedicos: {
+                titulo: "Sistemas Biomédicos",
+                tipoCurso: "Curso Superior de Tecnologia",
+                modalidade: "Presencial",
+                eixo: "Ambiente e Saúde",
+                duracao: "6 semestres",
+                info: "Integra o conhecimento de engenharia com as ciências da saúde para desenvolver e gerenciar equipamentos médicos, próteses e sistemas de diagnóstico."
             }
+        };
 
-            // Exibe a caixa de confirmação para o usuário
-            const confirmacao = confirm(`Deseja realmente abrir a janela com informações sobre o curso de ${select.options[select.selectedIndex].text}?`);
+        const modal = document.getElementById('confirmation-modal');
+        const modalMessage = document.getElementById('modal-message');
+        const modalConfirmBtn = document.getElementById('modal-confirm');
+        const modalCancelBtn = document.getElementById('modal-cancel');
+        
+        let cursoSelecionadoValue = null;
 
-            // Se o usuário confirmar (clicar em OK)
-            if (confirmacao) {
-                // Abre uma nova janela com 600x300 pixels
-                const novaJanela = window.open("", "_blank", "width=600,height=300");
+        const customSelectHeader = document.querySelector('.custom-select-header');
+        const customOptionsList = document.querySelector('.custom-options-list');
+        const selectedValueSpan = document.querySelector('.selected-value');
 
-                // Verifica se a janela foi aberta com sucesso (se não foi bloqueada)
-                if (novaJanela) {
-                    const cursoInfo = infoCursos[cursoSelecionado];
+        // Preenche o seletor customizado com as opções
+        function fillCustomSelect() {
+            // Adiciona a opção padrão
+            const defaultOption = document.createElement('li');
+            defaultOption.classList.add('custom-option');
+            defaultOption.textContent = '--Selecione--';
+            defaultOption.dataset.value = '';
+            customOptionsList.appendChild(defaultOption);
 
-                    // Escreve o conteúdo HTML na nova janela
-                    novaJanela.document.write(`
-                        <!DOCTYPE html>
-                        <html lang="pt-BR">
-                        <head>
-                            <meta charset="UTF-8">
-                            <title>${cursoInfo.titulo}</title>
-                            <style>
-                                body {
-                                    font-family: Arial, sans-serif;
-                                    padding: 20px;
-                                    background-color: #f9f9f9;
-                                }
-                                h2 {
-                                    color: #004d40;
-                                }
-                                p {
-                                    line-height: 1.6;
-                                }
-                            </style>
-                        </head>
-                        <body>
-                            <h2>Informações sobre o curso de ${cursoInfo.titulo}</h2>
-                            <p>${cursoInfo.info}</p>
-                        </body>
-                        </html>
-                    `);
-                    novaJanela.document.close();
-                } else {
-                    // Se a janela não puder ser aberta, avisa o usuário
-                    alert("O pop-up foi bloqueado pelo seu navegador. Por favor, habilite-o para continuar.");
-                }
+            // Adiciona as opções de cursos
+            for (const value in infoCursos) {
+                const option = document.createElement('li');
+                option.classList.add('custom-option');
+                option.textContent = infoCursos[value].titulo;
+                option.dataset.value = value;
+                customOptionsList.appendChild(option);
             }
         }
+
+        // Evento para mostrar/esconder o menu
+        customSelectHeader.addEventListener('click', () => {
+            customOptionsList.classList.toggle('active');
+            customSelectHeader.classList.toggle('active');
+        });
+
+        // Evento para selecionar uma opção
+        customOptionsList.addEventListener('click', (event) => {
+            const selectedOption = event.target.closest('.custom-option');
+            if (selectedOption) {
+                // Remove a classe 'selected' de todas as opções
+                document.querySelectorAll('.custom-option').forEach(opt => opt.classList.remove('selected'));
+                // Adiciona a classe 'selected' à opção clicada
+                selectedOption.classList.add('selected');
+                
+                selectedValueSpan.textContent = selectedOption.textContent;
+                cursoSelecionadoValue = selectedOption.dataset.value;
+                customOptionsList.classList.remove('active');
+                customSelectHeader.classList.remove('active');
+
+                // Se uma opção de curso válida for selecionada
+                if (cursoSelecionadoValue) {
+                    modalMessage.textContent = `Deseja realmente abrir a janela com informações sobre o curso de ${selectedValueSpan.textContent}?`;
+                    modal.classList.add('show');
+                }
+            }
+        });
+
+        // Evento para fechar o menu se clicar fora
+        document.addEventListener('click', (event) => {
+            const isClickInside = customSelectHeader.contains(event.target) || customOptionsList.contains(event.target);
+            if (!isClickInside) {
+                customOptionsList.classList.remove('active');
+                customSelectHeader.classList.remove('active');
+            }
+        });
+        
+        modalConfirmBtn.addEventListener('click', () => {
+            abrirNovaJanela(cursoSelecionadoValue);
+            modal.classList.remove('show');
+        });
+
+        modalCancelBtn.addEventListener('click', () => {
+            modal.classList.remove('show');
+        });
+
+        function abrirNovaJanela(curso) {
+            const novaJanela = window.open("", "_blank", "width=600,height=300");
+
+            if (novaJanela) {
+                const cursoInfo = infoCursos[curso];
+                
+                // Escreve o conteúdo HTML na nova janela
+                novaJanela.document.write(`
+                    <!DOCTYPE html>
+                    <html lang="pt-BR">
+                    <head>
+                        <meta charset="UTF-8">
+                        <title>${cursoInfo.titulo}</title>
+                        <link rel="preconnect" href="https://fonts.googleapis.com">
+                        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+                        <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+                        <style>
+                            :root {
+                                --bg-dark: #0d0d0d;
+                                --bg-secondary: #1a1a1a;
+                                --text-light: #ffffff;
+                                --text-gray: #b0b0b0;
+                                --heading-color: #009688;
+                                --tag-bg: #333333;
+                                --highlight-color: rgb(0, 255, 205);
+                            }
+                            ::selection {
+                                background-color: var(--highlight-color);
+                                color: black;
+                            }
+                            body {
+                                font-family: 'Kanit', sans-serif;
+                                background-color: var(--bg-dark);
+                                color: var(--text-light);
+                                display: flex;
+                                flex-direction: column;
+                                min-height: 100vh;
+                                margin: 0;
+                            }
+                            .content-wrapper {
+                                flex-grow: 1;
+                                padding: 15px;
+                            }
+                            h2 {
+                                color: var(--heading-color);
+                                margin-top: 0;
+                            }
+                            .tag-container {
+                                display: flex;
+                                flex-wrap: wrap;
+                                gap: 8px;
+                                margin-bottom: 15px;
+                            }
+                            .tag {
+                                background-color: var(--tag-bg);
+                                color: var(--text-gray);
+                                padding: 5px 10px;
+                                border-radius: 20px;
+                                font-size: 14px;
+                            }
+                            p {
+                                line-height: 1.6;
+                                margin: 5px 0;
+                            }
+                            .footer {
+                                width: 100%;
+                                background-color: var(--bg-secondary);
+                                color: var(--text-gray);
+                                padding: 20px 40px;
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                box-sizing: border-box;
+                                border-top: 2px solid var(--text-light);
+                                border-radius: 15px 15px 0 0;
+                            }
+                            .footer-info, .footer-social {
+                                text-align: left;
+                            }
+                            .footer-social {
+                                text-align: right;
+                            }
+                            .footer h4, .footer p {
+                                margin: 0;
+                                padding: 2px 0;
+                            }
+                            .social-icons a {
+                                color: var(--text-light);
+                                margin-left: 15px;
+                                font-size: 24px;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <!-- Bloco do conteúdo principal -->
+                        <div class="content-wrapper">
+                            <h2>${cursoInfo.titulo}</h2>
+                            <div class="tag-container">
+                                <span class="tag">${cursoInfo.tipoCurso}</span>
+                                <span class="tag">${cursoInfo.modalidade}</span>
+                                <span class="tag">${cursoInfo.eixo}</span>
+                            </div>
+                            <p><strong>Duração:</strong> ${cursoInfo.duracao}</p>
+                            <p><strong>Descrição:</strong> ${cursoInfo.info}</p>
+                        </div>
+
+                        <!-- Bloco do rodapé -->
+                        <footer class="footer">
+                            <div class="footer-info">
+                                <h4>Fatec Sorocaba</h4>
+                                <p>Av. Eng. Carlos Reinaldo Mendes, 2.015 - Alto da Boa Vista - Sorocaba/SP - CEP: 18013-280</p>
+                                <p>Telefone: (15) 3238-5266 / 3228-2366 / 3228-2370</p>
+                                <p>Horário de funcionamento: Seg. a Sex. das 07:30 às 23:00</p>
+                            </div>
+                            <div class="footer-social">
+                                <div class="social-icons">
+                                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                                </div>
+                            </div>
+                        </footer>
+                    </body>
+                    </html>
+                `);
+                novaJanela.document.close();
+            }
+        }
+        
+        // Inicializa o seletor personalizado
+        fillCustomSelect();
+
     </script>
 
-</body>
+    <footer class="main-footer">
+        <div class="footer-info">
+            <h4>Fatec Sorocaba</h4>
+            <p>Av. Eng. Carlos Reinaldo Mendes, 2.015 - Alto da Boa Vista - Sorocaba/SP - CEP: 18013-280</p>
+            <p>Telefone: (15) 3238-5266 / 3228-2366 / 3228-2370</p>
+        </div>
+        <div class="footer-social">
+            <div class="social-icons">
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+        </div>
+    </footer>
 
+</body>
 </html>
