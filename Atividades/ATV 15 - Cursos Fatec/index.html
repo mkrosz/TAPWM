@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursos FATEC Sorocaba</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        select {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        label {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Cursos FATEC Sorocaba</h1>
+
+    <label for="cursos">Selecione um curso:</label>
+    <select name="cursos" id="cursos" onchange="abrirCurso()">
+        <option value="">--Selecione--</option>
+        <option value="ads">Análise e Desenvolvimento de Sistemas</option>
+        <option value="si">Sistemas para Internet</option>
+        <option value="polimeros">Polímeros</option>
+        <option value="fabrica">Fabricação Mecânica</option>
+        <option value="logistica">Logística</option>
+        <option value="rh">Gestão de Recursos Humanos</option>
+        <option value="papeis">Papéis e Celulose</option>
+    </select>
+
+    <script>
+        // Esta função é chamada pelo evento onchange do menu suspenso no HTML
+        function abrirCurso() {
+            // Objeto para armazenar as informações de cada curso de forma organizada
+            const infoCursos = {
+                ads: {
+                    titulo: "Análise e Desenvolvimento de Sistemas",
+                    info: "O tecnólogo em Análise e Desenvolvimento de Sistemas projeta, documenta, especifica, testa e implanta sistemas computacionais de informação. Atua na gestão de projetos de software, aplicando metodologias e ferramentas para o ciclo de vida de desenvolvimento."
+                },
+                si: {
+                    titulo: "Sistemas para Internet",
+                    info: "O tecnólogo em Sistemas para Internet desenvolve e projeta sites, portais, e-commerces e aplicativos para a web. Atua com linguagens de programação, bancos de dados e frameworks para criar soluções dinâmicas e interativas na internet."
+                },
+                polimeros: {
+                    titulo: "Polímeros",
+                    info: "O tecnólogo em Polímeros atua no desenvolvimento, produção e controle de qualidade de materiais poliméricos, como plásticos e borrachas. O profissional pode trabalhar em indústrias automotivas, de embalagens, farmacêuticas e outras que utilizam esses materiais."
+                },
+                fabrica: {
+                    titulo: "Fabricação Mecânica",
+                    info: "O tecnólogo em Fabricação Mecânica atua no planejamento, execução e controle de processos de fabricação. O profissional opera e programa máquinas-ferramenta, como tornos CNC, e garante a qualidade na produção de peças e componentes mecânicos."
+                },
+                logistica: {
+                    titulo: "Logística",
+                    info: "O tecnólogo em Logística gerencia operações de transporte, estoque e distribuição. O profissional planeja rotas, controla o fluxo de materiais e informações, e busca otimizar a cadeia de suprimentos para reduzir custos e aumentar a eficiência."
+                },
+                rh: {
+                    titulo: "Gestão de Recursos Humanos",
+                    info: "O tecnólogo em Gestão de Recursos Humanos planeja e gerencia as estratégias de pessoal de uma organização. O profissional atua com recrutamento, seleção, treinamento, avaliação de desempenho e políticas de benefícios para aprimorar o ambiente de trabalho."
+                },
+                papeis: {
+                    titulo: "Papéis e Celulose",
+                    info: "O tecnólogo em Papéis e Celulose atua no processo produtivo desde a extração da celulose até a fabricação de diferentes tipos de papéis. O profissional gerencia a operação de máquinas e o controle de qualidade do produto final."
+                }
+            };
+
+            const select = document.getElementById('cursos');
+            const cursoSelecionado = select.value;
+
+            // Se a opção inicial "--Selecione--" for escolhida, a função não faz nada
+            if (cursoSelecionado === "") {
+                return;
+            }
+
+            // Exibe a caixa de confirmação para o usuário
+            const confirmacao = confirm(`Deseja realmente abrir a janela com informações sobre o curso de ${select.options[select.selectedIndex].text}?`);
+
+            // Se o usuário confirmar (clicar em OK)
+            if (confirmacao) {
+                // Abre uma nova janela com 600x300 pixels
+                const novaJanela = window.open("", "_blank", "width=600,height=300");
+
+                // Verifica se a janela foi aberta com sucesso (se não foi bloqueada)
+                if (novaJanela) {
+                    const cursoInfo = infoCursos[cursoSelecionado];
+
+                    // Escreve o conteúdo HTML na nova janela
+                    novaJanela.document.write(`
+                        <!DOCTYPE html>
+                        <html lang="pt-BR">
+                        <head>
+                            <meta charset="UTF-8">
+                            <title>${cursoInfo.titulo}</title>
+                            <style>
+                                body {
+                                    font-family: Arial, sans-serif;
+                                    padding: 20px;
+                                    background-color: #f9f9f9;
+                                }
+                                h2 {
+                                    color: #004d40;
+                                }
+                                p {
+                                    line-height: 1.6;
+                                }
+                            </style>
+                        </head>
+                        <body>
+                            <h2>Informações sobre o curso de ${cursoInfo.titulo}</h2>
+                            <p>${cursoInfo.info}</p>
+                        </body>
+                        </html>
+                    `);
+                    novaJanela.document.close();
+                } else {
+                    // Se a janela não puder ser aberta, avisa o usuário
+                    alert("O pop-up foi bloqueado pelo seu navegador. Por favor, habilite-o para continuar.");
+                }
+            }
+        }
+    </script>
+
+</body>
+
+</html>
